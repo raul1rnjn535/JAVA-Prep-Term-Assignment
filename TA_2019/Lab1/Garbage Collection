@@ -1,0 +1,26 @@
+public class Test1 {
+  public static void main () {
+    int N = 10;
+    int M = 100000;
+    for(int i =0; i< N; i++) {
+      int[] box = new int[M];
+    }
+  }
+}
+
+In the code above, Maximum Value that N can take is Integer.MAX_VALUE. Since at each iteration, ref variable "box" will point to new integer array created in that iteration. Thus, there will be no reference to integer array created in previous iteration, which in turn will be removed by garbage collector.
+
+public class Test1 {
+  public static void main () {
+    int N = 10;
+    int M = 100000;
+    int[][] boxes = new int[N][];
+    for(int i =0; i< N; i++) {
+        int[] box = new int[M];
+        boxes[i] = box;
+    }
+  }
+}
+
+Now in example2, references of int[] created is still present in memory, hence garbage collection will not be able to free the newly created int[] in future iterations.
+In this example, Maximum Value of N = 10^4 (approx)
